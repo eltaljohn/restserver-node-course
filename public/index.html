@@ -33,7 +33,11 @@
       function handleCredentialResponse(response) {
         // Google ID Token
         // console.log("id_token", response.credential);
-        fetch("http://localhost:8080/api/auth/google", {
+        const url = window.location.hostname.includes("localhost")
+          ? "http://localhost:8080"
+          : "https://restserver-node-course-john.herokuapp.com";
+
+        fetch(`${url}/api/auth/google`, {
           method: "POST",
           headers: {
             "Content-Type": "Application/json",
