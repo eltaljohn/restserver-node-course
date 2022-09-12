@@ -29,7 +29,6 @@ router.post(
   [
     validateJWT,
     check("name", "name field is mandatory").notEmpty(),
-    check("description", "description field is mandatory").notEmpty(),
     check("category", "category field is mandatory").notEmpty(),
     check("category", "It's an inavalid Mongo Id").isMongoId(),
     check("category").custom(categoryExistById),
