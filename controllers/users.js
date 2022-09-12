@@ -29,7 +29,7 @@ const usersPost = async (req, res = response) => {
   // Save at DB
   await user.save();
 
-  res.json({
+  res.status(201).json({
     user,
   });
 };
@@ -44,7 +44,7 @@ const usersPut = async (req, res = response) => {
     rest.password = bcryptjs.hashSync(password, salt);
   }
 
-  const user = await User.findByIdAndUpdate(id, rest);
+  const user = await User.findByIdAndUpdate(id, rest, { new: true });
 
   res.json({ user });
 };
@@ -52,7 +52,11 @@ const usersPut = async (req, res = response) => {
 const usersDelete = async (req, res = response) => {
   const id = req.params.id;
 
-  const user = await User.findByIdAndUpdate(id, { state: false });
+  const user = await User.findByIdAndUpdate(
+    id,
+    { state: false },
+    { new: true }
+  );
 
   res.json({
     user,
